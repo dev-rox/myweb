@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios HTML</title>
+</head>
+
+<body>
+    <header>
+        <h1>Exercícios HTML</h1>
+    </header>
+    <nav>
+        <a href wb-mod="content/funcionou.html"> 00 - Teste</a> |
+        <a href wb-mod="content/textos.html"> 01 - Textos</a> |
+        <a href wb-mod="content/textos2.html"> 02 - Textos 2</a> |
+        <a href wb-mod="content/listas.html"> 03 - Listas</a> |
+        <a href wb-mod="content/listaAninhada.html"> 04 - Lista Aninhada</a> |
+        <a href wb-mod="content/links.html"> 05 - Links</a> |
+        <a href wb-mod="content/tabelas.html"> 06 - Tabelas</a> |
+        <a href wb-mod="content/form/form.html"> 07 - Formulário</a> |
+    </nav>
+    <section id="conteudo"></section>
+    <footer>Curso web moderno</footer>
+    <script>
+        const conteudo = document.getElementById('conteudo')
+
+        document.querySelectorAll('[wb-mod]').forEach(link => {
+            link.onclick = function (e) {
+                e.preventDefault()
+
+                fetch(link.getAttribute('wb-mod'))
+                    .then(resp => resp.text())
+                    .then(html => conteudo.innerHTML = html)
+            }
+        })
+
+    </script>
+</body>
+
+</html>

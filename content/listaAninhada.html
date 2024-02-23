@@ -1,0 +1,74 @@
+<style>/* Initially hide nested lists */
+    ul ul {
+      display: none;
+    }
+    
+    /* Change cursor for items that can be expanded */
+    .toggle {
+      cursor: pointer;
+    }</style>
+
+
+<h1>Projeto</h1>
+
+<ul id="tree" class="tree">
+    <li>
+        <span class="toggle">▼</span>backend
+        <ul>
+            <li><span class="toggle">▼</span>app
+                <ul>
+                    <li>produto.js</li>
+                    <li>usuario.js</li>
+                    <li>venda.js</li>
+                </ul>
+            </li>
+            <li><span class="toggle">▼</span>config
+                <ul>
+                    <li>banco.js</li>
+                    <li>rotas.js</li>
+                    <li>servidor.js</li>
+                </ul>
+            </li>
+        </ul> <!-- A tag </ul> estava aqui, fechando o elemento antes do esperado -->
+    </li>
+    <li><span class="toggle">▼</span>Frontend
+        <ul>
+            <li><span class="toggle">▼</span>
+                public
+                <ul>
+                    <li>
+                        app.css
+                    </li>
+                    <li>app.js</li>
+                    <li>index.html</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+<link rel="stylesheet" href="http://files.cod3r.com.br/curso-web/tree.css">
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add click event listener to toggle items
+        var toggles = document.querySelectorAll('.toggle');
+        toggles.forEach(function(toggle) {
+            toggle.addEventListener('click', function() {
+                var parent = this.parentElement;
+                var nestedList = parent.querySelector('ul');
+                if (nestedList) {
+                    // Get the computed style
+                    var computedStyle = window.getComputedStyle(nestedList);
+                    // Check if the display property is 'none'
+                    if (computedStyle.getPropertyValue('display') === 'none') {
+                        nestedList.style.display = 'block';
+                        this.textContent = '▼'; // Change toggle icon to indicate collapse
+                    } else {
+                        nestedList.style.display = 'none';
+                        this.textContent = '►'; // Change toggle icon to indicate expand
+                    }
+                }
+            });
+        });
+    });
+</script>
